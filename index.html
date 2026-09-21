@@ -47,37 +47,39 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
 /* game */
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;color:#BFD3CF}
 .players{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.pl{background:var(--felt-dark);border-radius:14px;padding:10px 12px;border:2px solid transparent}
+.pl{background:var(--felt-dark);border-radius:12px;padding:8px 10px;border:2px solid transparent;display:flex;align-items:center;gap:8px}
 .pl.turn{border-color:var(--paper)}
-.pl .nm{display:flex;align-items:center;gap:7px;font-weight:700;font-size:15px}
-.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-block;flex:none;border:2px solid #fff}
 .dot.p0{background:var(--p0)} .dot.p1{background:var(--p1)}
-.pl .money{font-size:24px;font-weight:800;margin-top:2px;letter-spacing:-.01em}
-.pl .worth{font-size:12px;color:#BFD3CF}
-.board{display:grid;width:100%;aspect-ratio:1;gap:2px;background:var(--felt-line);padding:2px;border-radius:12px}
-.tile{position:relative;background:var(--paper);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:var(--ink);min-width:0}
-.tile .band{width:100%;height:5px;flex:none}
-.tile .tn{font-size:9px;font-weight:700;line-height:1.1;text-align:center;padding:2px 1px 0;word-break:break-all}
-.tile .tp{font-size:8px;color:var(--ink-soft);line-height:1.1}
-.tile .lv{font-size:8px;letter-spacing:-1px;line-height:1.1}
+.pl .nm{font-weight:700;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl .money{font-size:17px;font-weight:800;line-height:1.2}
+.pl .worth{font-size:11px;color:#BFD3CF;line-height:1.2}
+.board{display:grid;grid-template-columns:repeat(4,1fr);width:100%;gap:4px}
+.tile{position:relative;background:var(--paper);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;align-items:center;color:var(--ink);min-width:0;padding-bottom:18px}
+.board.quick .tile{min-height:74px} .board.classic .tile{min-height:60px}
+.tile .band{width:100%;height:7px;flex:none}
+.tile .idx{position:absolute;top:9px;left:4px;font-size:9px;color:var(--ink-soft);opacity:.7}
+.tile .tn{font-size:12px;font-weight:700;line-height:1.15;text-align:center;padding:4px 3px 0;word-break:break-all}
+.board.classic .tile .tn{font-size:11px;padding-top:3px}
+.tile .tp{font-size:11px;color:var(--ink-soft);line-height:1.2;margin-top:1px}
+.tile .lv{font-size:11px;line-height:1.2;margin-top:1px;color:var(--ink)}
 .tile.corner{background:var(--paper-dim)}
-.tile.corner .tn{font-size:10px;padding-top:4px}
-.tile.own0{box-shadow:inset 0 0 0 2px var(--p0)} .tile.own1{box-shadow:inset 0 0 0 2px var(--p1)}
-.tile.hot{background:#FFFBEF;box-shadow:inset 0 0 0 2px var(--gold)}
-.tk{position:absolute;bottom:2px;width:11px;height:11px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.35);transition:none}
-.tk.p0{background:var(--p0);left:3px} .tk.p1{background:var(--p1);right:3px}
-.mid{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;color:var(--paper)}
-.mid .dice{display:flex;gap:8px;margin-bottom:6px}
-.die{width:38px;height:38px;border-radius:9px;background:var(--paper);color:var(--ink);font-size:30px;line-height:38px;font-weight:800}
+.tile.own0{box-shadow:inset 0 0 0 3px var(--p0)} .tile.own1{box-shadow:inset 0 0 0 3px var(--p1)}
+.tile.own0 .band{background:var(--p0)!important} .tile.own1 .band{background:var(--p1)!important}
+.tile.hot{box-shadow:inset 0 0 0 3px var(--gold);background:#FFFBEF}
+.tk{position:absolute;bottom:3px;width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.tk.p0{background:var(--p0);left:4px} .tk.p1{background:var(--p1);right:4px}
+.die{width:48px;height:48px;border-radius:10px;background:var(--paper);color:var(--ink);font-size:40px;line-height:48px;font-weight:800;text-align:center}
 .die.roll{animation:shake .5s linear infinite}
 @keyframes shake{0%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}100%{transform:rotate(0)}}
 @media(prefers-reduced-motion:reduce){.die.roll{animation:none}}
-.mid .msg{font-size:13px;line-height:1.35;max-width:100%}
-.mid .msg b{color:var(--gold)}
-.panel{margin-top:12px;background:var(--felt-dark);border-radius:16px;padding:14px}
-.panel .say{font-size:16px;line-height:1.45;min-height:1.4em;margin-bottom:12px}
+.panel{margin-top:12px;background:var(--felt-dark);border-radius:16px;padding:12px 14px}
+.panel .say{font-size:15px;line-height:1.45;min-height:1.4em;margin-bottom:10px}
 .panel .say b{color:var(--gold)}
-.actions{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+.controls{display:flex;gap:10px;align-items:center}
+.dice{display:flex;gap:6px;flex:none}
+.actions{display:grid;gap:8px;grid-template-columns:1fr 1fr;flex:1}
+.actions button{padding:13px 8px}
 .actions button.wide{grid-column:1/-1}
 .log{margin-top:12px;font-size:13px;line-height:1.55;color:#BFD3CF;max-height:150px;overflow:auto;padding-right:4px}
 .log div{padding:2px 0;border-bottom:1px dashed var(--felt-line)}
@@ -141,7 +143,7 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
   <div class="board" id="board"></div>
   <div class="panel" id="panel">
     <div class="say" id="say"></div>
-    <div class="actions" id="actions"></div>
+    <div class="controls"><div class="dice" id="dice"></div><div class="actions" id="actions"></div></div>
   </div>
   <div id="over"></div>
   <div class="log" id="log"></div>
@@ -415,7 +417,7 @@ function render(){
   const c=cfg();
   $('g-mode').textContent=T('m_'+st.mode)+'・'+(net.online?T('room')+' '+net.code:T('onePhone'));
   $('g-round').textContent=T('round',{r:Math.min(st.round,c.maxRounds),m:c.maxRounds});
-  $('g-players').innerHTML=st.players.map((p,i)=>`<div class="pl ${st.turn===i&&st.phase==='play'?'turn':''}"><div class="nm"><span class="dot p${i}"></span>${esc(p.name)}${net.online&&net.me===i?T('you'):''}</div><div class="money">$${p.money}</div><div class="worth">${T('worth')} $${worth(i)}${p.skip?'・'+T('skipping'):''}${p.boost?'・'+T('boosted'):''}</div></div>`).join('');
+  $('g-players').innerHTML=st.players.map((p,i)=>`<div class="pl ${st.turn===i&&st.phase==='play'?'turn':''}"><span class="dot p${i}"></span><div style="min-width:0"><div class="nm">${esc(p.name)}${net.online&&net.me===i?T('you'):''}</div><div class="money">$${p.money}</div><div class="worth">${T('worth')} $${worth(i)}${p.skip?'・'+T('skipping'):''}${p.boost?'・'+T('boosted'):''}</div></div></div>`).join('');
   renderBoard();
   renderPanel();
   $('log').innerHTML=st.log.map(l=>`<div>${logText(l)}</div>`).join('');
@@ -423,24 +425,24 @@ function render(){
 function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 
 function renderBoard(){
-  const side=cfg().side, n=side+1, TT=tiles();
-  const b=$('board'); b.style.gridTemplateColumns=`repeat(${n},1fr)`; b.style.gridTemplateRows=`repeat(${n},1fr)`;
+  const TT=tiles();
+  const b=$('board'); b.className='board '+st.mode;
   let h='';
   TT.forEach((t,i)=>{
-    const s=Math.floor(i/side),k=i%side; let r,cc;
-    if(s===0){r=0;cc=k}else if(s===1){r=k;cc=side}else if(s===2){r=side;cc=side-k}else{r=side-k;cc=0}
+    const r=Math.floor(i/4), c=(r%2===0)?(i%4):(3-i%4);
     const o=st.owners[i]; const hot=st.players[st.turn].pos===i&&st.phase==='play';
     const cls=['tile',t.t!=='prop'?'corner':'',o?'own'+o.owner:'',hot?'hot':''].join(' ');
     const band=t.t==='prop'?`<div class="band" style="background:var(--g${t.g})"></div>`:'<div class="band" style="background:transparent"></div>';
     const sub=t.t==='prop'?(o?`<span class="lv">${'▲'.repeat(o.level)||'&nbsp;'}</span>`:`<span class="tp">$${t.p}</span>`):(t.t==='tax'?`<span class="tp">-$${t.a}</span>`:'');
     const tk=st.players.map((p,pi)=>p.pos===i?`<span class="tk p${pi}"></span>`:'').join('');
-    h+=`<div class="${cls}" style="grid-row:${r+1};grid-column:${cc+1}">${band}<span class="tn">${tileName(i)}</span>${sub}${tk}</div>`;
+    h+=`<div class="${cls}" style="grid-row:${r+1};grid-column:${c+1}">${band}<span class="idx">${i+1}</span><span class="tn">${tileName(i)}</span>${sub}${tk}</div>`;
   });
-  const dice=(st.dice.length?st.dice:Array(cfg().dice).fill(0)).map(d=>`<div class="die ${busy?'roll':''}">${d?FACES[d-1]:'·'}</div>`).join('');
-  const cur=st.players[st.turn];
-  const msg=st.phase==='over'?`<b>${T('over')}</b>`:(myTurn()?T('turnOf',{n:cur.name}):T('waitFor',{n:cur.name}));
-  h+=`<div class="mid" style="grid-row:2/${n};grid-column:2/${n}"><div class="dice">${dice}</div><div class="msg">${msg}</div></div>`;
   b.innerHTML=h;
+  renderDice();
+}
+function renderDice(){
+  const d=(st.dice.length?st.dice:Array(cfg().dice).fill(0));
+  $('dice').innerHTML=d.map(x=>`<div class="die ${busy?'roll':''}">${x?FACES[x-1]:'·'}</div>`).join('');
 }
 
 function renderPanel(){
