@@ -54,13 +54,20 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
 .pl .nm{font-weight:700;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl .money{font-size:17px;font-weight:800;line-height:1.2}
 .pl .worth{font-size:11px;color:#BFD3CF;line-height:1.2}
-.board{display:grid;grid-template-columns:repeat(4,1fr);width:100%;gap:4px}
+.board{display:grid;width:100%;gap:4px}
 .tile{position:relative;background:var(--paper);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;align-items:center;color:var(--ink);min-width:0;padding-bottom:18px}
-.board.quick .tile{min-height:74px} .board.classic .tile{min-height:60px}
+.board.snake.quick .tile{min-height:74px} .board.snake.classic .tile{min-height:60px}
+.board.ring.quick .tile{min-height:58px} .board.ring.classic .tile{min-height:46px}
+.board.ring.classic .tile .tn{font-size:10px} .board.ring.classic .tile .tp,.board.ring.classic .tile .lv{font-size:10px}
+.tile .dir{position:absolute;top:8px;right:4px;font-size:12px;font-weight:800;color:var(--ink-soft);line-height:1}
+.tile .dir.turn{color:var(--ink);font-size:14px}
+.mid{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;color:var(--paper);font-size:14px;line-height:1.4}
+.mid b{color:var(--gold)}
+.mid .last{font-size:12px;color:#BFD3CF;margin-top:6px}
 .tile .band{width:100%;height:7px;flex:none}
-.tile .idx{position:absolute;top:9px;left:4px;font-size:9px;color:var(--ink-soft);opacity:.7}
+.tile .idx{position:absolute;top:8px;left:4px;font-size:9px;color:var(--ink-soft);opacity:.7}
 .tile .tn{font-size:12px;font-weight:700;line-height:1.15;text-align:center;padding:4px 3px 0;word-break:break-all}
-.board.classic .tile .tn{font-size:11px;padding-top:3px}
+.board.snake.classic .tile .tn{font-size:11px;padding-top:3px}
 .tile .tp{font-size:11px;color:var(--ink-soft);line-height:1.2;margin-top:1px}
 .tile .lv{font-size:11px;line-height:1.2;margin-top:1px;color:var(--ink)}
 .tile.corner{background:var(--paper-dim)}
@@ -109,6 +116,13 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
     </div>
   </div>
 
+  <div class="field"><label data-i="layout"></label>
+    <div class="seg" id="seg-layout">
+      <button data-v="ring"><span data-i="ring"></span><small data-i="ring_s"></small></button>
+      <button data-v="snake"><span data-i="snake"></span><small data-i="snake_s"></small></button>
+    </div>
+  </div>
+
   <div class="field" id="f-mode"><label data-i="mode"></label>
     <div class="seg" id="seg-mode">
       <button data-v="quick" class="sel"><span data-i="quick"></span><small data-i="quick_s"></small></button>
@@ -138,7 +152,7 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
 
 <!-- 遊戲 -->
 <section id="s-game" class="screen">
-  <div class="topbar"><span id="g-mode"></span><span id="g-round"></span><button class="ghost" id="b-lang" style="padding:4px 10px;border-radius:8px;font-size:12px"></button></div>
+  <div class="topbar"><span id="g-mode"></span><span id="g-round"></span><span><button class="ghost" id="b-layout" style="padding:4px 8px;border-radius:8px;font-size:12px;margin-right:6px"></button><button class="ghost" id="b-lang" style="padding:4px 8px;border-radius:8px;font-size:12px"></button></span></div>
   <div class="players" id="g-players"></div>
   <div class="board" id="board"></div>
   <div class="panel" id="panel">
@@ -220,7 +234,7 @@ zh:{
  title:'兩人大富翁',sub:'給你們兩個玩的小桌遊。各拿一支手機，開一間房就能開始。',
  myname:'你的名字',myname_ph:'例如：周',name2:'對方的名字',name2_ph:'例如：小美',
  how:'怎麼玩',online:'兩支手機',online_s:'各看自己的畫面',local:'同一支手機',local_s:'輪流傳給對方',
- mode:'模式',quick:'快速',quick_s:'20 格・15 回合・約 10 分',classic:'經典',classic_s:'32 格・最多 40 回合',
+ layout:'棋盤排列',ring:'環形',ring_s:'繞一圈，方向清楚',snake:'蛇形',snake_s:'格子最大，來回走',mode:'模式',quick:'快速',quick_s:'20 格・15 回合・約 10 分',classic:'經典',classic_s:'32 格・最多 40 回合',
  create:'開新房間',startLocal:'開始遊戲',code_ph:'輸入 4 位房號',join:'加入',
  note:'兩支手機模式：把連結傳給對方，房主選模式開房，對方輸入房號加入。兩支手機最好連同一個 Wi-Fi。語言可以各自選。',
  e_storage:'這個環境沒有連線功能，請改用「同一支手機」模式。',e_disc:'連線中斷了。兩支手機請連同一個 Wi-Fi，然後重新開房。',connecting:'連線中…',e_name:'先填你的名字。',e_create:'建立房間失敗，請再試一次。',e_code:'房號是 4 位數字。',e_notfound:'找不到這個房號，確認一下對方有沒有開房。',e_started:'這間房已經開始了。',
@@ -239,7 +253,7 @@ ja:{
  title:'ふたりの大富豪すごろく',sub:'ふたり専用のミニボードゲーム。それぞれスマホを持って、部屋を作ればすぐ始められます。',
  myname:'あなたの名前',myname_ph:'例：なつ',name2:'相手の名前',name2_ph:'例：しゅう',
  how:'遊び方',online:'スマホ2台',online_s:'それぞれの画面で',local:'スマホ1台',local_s:'交代で回す',
- mode:'モード',quick:'クイック',quick_s:'20マス・15ラウンド・約10分',classic:'クラシック',classic_s:'32マス・最大40ラウンド',
+ layout:'盤面の並び',ring:'ぐるり一周',ring_s:'方向がわかりやすい',snake:'ジグザグ',snake_s:'マスが一番大きい',mode:'モード',quick:'クイック',quick_s:'20マス・15ラウンド・約10分',classic:'クラシック',classic_s:'32マス・最大40ラウンド',
  create:'部屋を作る',startLocal:'ゲーム開始',code_ph:'4桁の部屋番号',join:'参加',
  note:'スマホ2台モード：リンクを相手に送り、ホストがモードを選んで部屋を作り、相手は部屋番号を入力して参加します。ふたりとも同じWi-Fiにつなぐのがおすすめ。言語はそれぞれ選べます。',
  e_storage:'この環境ではオンライン接続が使えません。「スマホ1台」モードをお使いください。',e_disc:'接続が切れました。ふたりとも同じWi-Fiにつないで、部屋を作り直してください。',connecting:'接続中…',e_name:'先に名前を入力してください。',e_create:'部屋を作れませんでした。もう一度お試しください。',e_code:'部屋番号は4桁の数字です。',e_notfound:'その部屋番号が見つかりません。相手が部屋を作ったか確認してください。',e_started:'この部屋はすでに始まっています。',
@@ -255,6 +269,7 @@ ja:{
   sell:'{n} はお金が足りず、「{t}」を売って ${v} 回収',bankrupt:'{n} が破産！',skip:'{n} はおしおき中、このターンは休み',bought:'{n} が「{t}」を購入',upgraded:'{n} が「{t}」をレベル {l} に',settle:'{m} ラウンド終了！資産結果：{a} ${x}、{b} ${y}'}
 }};
 let lang=(navigator.language||'').toLowerCase().startsWith('ja')?'ja':'zh';
+let layout='ring';
 const S=()=>STR[lang];
 function fmt(tpl,p){return tpl.replace(/\{(\w+)\}/g,(m,k)=>p&&p[k]!=null?esc(p[k]):m)}
 function T(k,p){return fmt(S()[k],p)}
@@ -267,6 +282,8 @@ function applyLang(){
   document.querySelectorAll('#seg-lang button').forEach(b=>b.classList.toggle('sel',b.dataset.v===lang));
   $('b-create').textContent=homeConn==='online'?T('create'):T('startLocal');
   $('b-lang').textContent=lang==='ja'?'中文':'日本語';
+  $('b-layout').textContent=layout==='ring'?T('snake'):T('ring');
+  document.querySelectorAll('#seg-layout button').forEach(b=>b.classList.toggle('sel',b.dataset.v===layout));
   if(st) render();
 }
 
@@ -424,19 +441,54 @@ function render(){
 }
 function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 
+const RING={quick:{cols:4,rows:8},classic:{cols:6,rows:12}};
+function cellOf(i){
+  if(layout==='snake'){ const r=Math.floor(i/4), c=(r%2===0)?(i%4):(3-i%4); return {r,c}; }
+  const {cols,rows}=RING[st.mode];
+  if(i<cols) return {r:0,c:i};
+  if(i<cols+rows-2) return {r:i-cols+1,c:cols-1};
+  if(i<2*cols+rows-2){ const k=i-(cols+rows-2); return {r:rows-1,c:cols-1-k}; }
+  const k=i-(2*cols+rows-2); return {r:rows-2-k,c:0};
+}
+function dirOf(i,N){
+  if(layout==='snake'){
+    if(i===N-1) return ['↺',true];
+    const r=Math.floor(i/4), last=(i%4===3);
+    if(last) return ['↓',true];
+    return [r%2===0?'→':'←',false];
+  }
+  const {cols,rows}=RING[st.mode];
+  if(i===N-1) return ['↑',false];
+  if(i===cols-1) return ['↓',true];
+  if(i===cols+rows-2) return ['←',true];
+  if(i===2*cols+rows-3) return ['↑',true];
+  if(i<cols-1) return ['→',false];
+  if(i<cols+rows-2) return ['↓',false];
+  if(i<2*cols+rows-2) return ['←',false];
+  return ['↑',false];
+}
 function renderBoard(){
-  const TT=tiles();
-  const b=$('board'); b.className='board '+st.mode;
+  const TT=tiles(), N=TT.length;
+  const b=$('board'); b.className='board '+layout+' '+st.mode;
+  const cols=layout==='snake'?4:RING[st.mode].cols, rows=layout==='snake'?Math.ceil(N/4):RING[st.mode].rows;
+  b.style.gridTemplateColumns=`repeat(${cols},1fr)`;
   let h='';
   TT.forEach((t,i)=>{
-    const r=Math.floor(i/4), c=(r%2===0)?(i%4):(3-i%4);
+    const {r,c}=cellOf(i);
     const o=st.owners[i]; const hot=st.players[st.turn].pos===i&&st.phase==='play';
     const cls=['tile',t.t!=='prop'?'corner':'',o?'own'+o.owner:'',hot?'hot':''].join(' ');
     const band=t.t==='prop'?`<div class="band" style="background:var(--g${t.g})"></div>`:'<div class="band" style="background:transparent"></div>';
     const sub=t.t==='prop'?(o?`<span class="lv">${'▲'.repeat(o.level)||'&nbsp;'}</span>`:`<span class="tp">$${t.p}</span>`):(t.t==='tax'?`<span class="tp">-$${t.a}</span>`:'');
     const tk=st.players.map((p,pi)=>p.pos===i?`<span class="tk p${pi}"></span>`:'').join('');
-    h+=`<div class="${cls}" style="grid-row:${r+1};grid-column:${c+1}">${band}<span class="idx">${i+1}</span><span class="tn">${tileName(i)}</span>${sub}${tk}</div>`;
+    const [ar,turn]=dirOf(i,N);
+    h+=`<div class="${cls}" style="grid-row:${r+1};grid-column:${c+1}">${band}<span class="idx">${i+1}</span><span class="dir ${turn?'turn':''}">${ar}</span><span class="tn">${tileName(i)}</span>${sub}${tk}</div>`;
   });
+  if(layout==='ring'){
+    const cur=st.players[st.turn];
+    const msg=st.phase==='over'?`<b>${T('over')}</b>`:(myTurn()?T('turnOf',{n:cur.name}):T('waitFor',{n:cur.name}));
+    const last=st.log[0]?`<div class="last">${logText(st.log[0])}</div>`:'';
+    h+=`<div class="mid" style="grid-row:2/${rows};grid-column:2/${cols}">${msg}${last}</div>`;
+  }
   b.innerHTML=h;
   renderDice();
 }
@@ -510,6 +562,8 @@ let homeConn='online', homeMode='quick';
 document.querySelectorAll('#seg-conn button').forEach(b=>b.onclick=()=>{ homeConn=b.dataset.v; document.querySelectorAll('#seg-conn button').forEach(x=>x.classList.toggle('sel',x===b)); $('joincode').parentElement.style.display=homeConn==='online'?'':'none'; $('home-note').style.display=homeConn==='online'?'':'none'; $('f-name2').style.display=homeConn==='online'?'none':''; $('b-create').textContent=homeConn==='online'?T('create'):T('startLocal'); });
 document.querySelectorAll('#seg-lang button').forEach(b=>b.onclick=()=>{ lang=b.dataset.v; applyLang(); });
 $('b-lang').onclick=()=>{ lang=lang==='ja'?'zh':'ja'; applyLang(); };
+$('b-layout').onclick=()=>{ layout=layout==='ring'?'snake':'ring'; applyLang(); };
+document.querySelectorAll('#seg-layout button').forEach(b=>b.onclick=()=>{ layout=b.dataset.v; applyLang(); });
 document.querySelectorAll('#seg-mode button').forEach(b=>b.onclick=()=>{ homeMode=b.dataset.v; document.querySelectorAll('#seg-mode button').forEach(x=>x.classList.toggle('sel',x===b)); });
 
 $('b-create').onclick=async()=>{
