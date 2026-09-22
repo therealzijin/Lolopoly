@@ -46,19 +46,44 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
 
 /* game */
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;color:#BFD3CF}
-.players{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.pl{background:var(--felt-dark);border-radius:12px;padding:8px 10px;border:2px solid transparent;display:flex;align-items:center;gap:8px}
+.players{display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:10px}
+.pl{background:var(--felt-dark);border-radius:12px;padding:7px 10px;border:2px solid transparent;display:flex;align-items:center;gap:10px}
 .pl.turn{border-color:var(--paper)}
-.dot{width:18px;height:18px;border-radius:50%;display:inline-block;flex:none;border:2px solid #fff}
-.dot.p0{background:var(--p0)} .dot.p1{background:var(--p1)}
+.av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;border:3px solid;flex:none;background:#0f2422}
+.av.p0{border-color:var(--p0)} .av.p1{border-color:var(--p1)}
+.pl .info{flex:1;min-width:0}
 .pl .nm{font-weight:700;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl .money{font-size:17px;font-weight:800;line-height:1.2}
-.pl .worth{font-size:11px;color:#BFD3CF;line-height:1.2}
-.board{display:grid;width:100%;gap:4px}
-.tile{position:relative;background:var(--paper);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;align-items:center;color:var(--ink);min-width:0;padding-bottom:18px}
-.board.snake.quick .tile{min-height:74px} .board.snake.classic .tile{min-height:60px}
-.board.ring.quick .tile{min-height:58px} .board.ring.classic .tile{min-height:46px}
+.pl .nm .ch{font-weight:500;color:#BFD3CF;font-size:12px}
+.pl .skill{font-size:10.5px;color:#BFD3CF;line-height:1.25;margin-top:2px}
+.pl .right{flex:none;text-align:right}
+.pl .money{font-size:18px;font-weight:800;line-height:1.1}
+.pl .cnt{font-size:12px;color:#BFD3CF;line-height:1.2;margin-top:2px}
+.pl .cnt b{color:var(--paper)}
+.pulse{animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,244,222,.9);transform:scale(1)}50%{box-shadow:0 0 0 7px rgba(255,244,222,0);transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.pulse{animation:none;box-shadow:0 0 0 3px var(--gold)}}
+.board{display:grid;width:100%;gap:5px}
+.tile{position:relative;background:var(--paper);border-radius:9px;overflow:hidden;display:flex;flex-direction:column;align-items:center;color:var(--ink);min-width:0;padding-bottom:22px}
+.board.snake.quick .tile{min-height:92px} .board.snake.classic .tile{min-height:66px}
+.board.ring.quick .tile{min-height:70px} .board.ring.classic .tile{min-height:52px}
+.tile .band{width:100%;height:8px;flex:none}
+.tile .idx{position:absolute;top:10px;left:5px;font-size:9px;color:var(--ink-soft);opacity:.7}
+.tile .tn{font-size:14px;font-weight:800;line-height:1.15;text-align:center;padding:6px 4px 0;word-break:break-all}
+.tile .tp{font-size:13px;color:var(--ink-soft);line-height:1.2;margin-top:2px;font-weight:600}
+.tile .lv{font-size:12px;line-height:1.2;margin-top:2px;letter-spacing:1px}
+.board.classic .tile .tn{font-size:11.5px;padding-top:4px} .board.classic .tile .tp,.board.classic .tile .lv{font-size:11px}
 .board.ring.classic .tile .tn{font-size:10px} .board.ring.classic .tile .tp,.board.ring.classic .tile .lv{font-size:10px}
+.tile.corner{background:var(--paper-dim)}
+.tile.own0{box-shadow:inset 0 0 0 3px var(--p0);background:#FFE7E2} .tile.own1{box-shadow:inset 0 0 0 3px var(--p1);background:#E2EEFB}
+.tile.own0 .band{background:var(--p0)!important} .tile.own1 .band{background:var(--p1)!important}
+.tile.own0 .lv{color:#B3321F} .tile.own1 .lv{color:#1F5FA8}
+.tile.hot{box-shadow:inset 0 0 0 3px var(--gold)}
+.tk{position:absolute;bottom:3px;width:24px;height:24px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.tk.p0{background:var(--p0);left:4px} .tk.p1{background:var(--p1);right:4px}
+.die{width:48px;height:48px;border-radius:10px;background:var(--paper);color:var(--ink);font-size:40px;line-height:48px;font-weight:800;text-align:center}
+.die.roll{animation:shake .5s linear infinite}
+@keyframes shake{0%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}100%{transform:rotate(0)}}
+@media(prefers-reduced-motion:reduce){.die.roll{animation:none}}
 .tile .dir{position:absolute;top:8px;right:4px;font-size:12px;font-weight:800;color:var(--ink-soft);line-height:1}
 .tile .dir.turn{color:var(--ink);font-size:14px}
 .mid{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;color:var(--paper);font-size:14px;line-height:1.4}
@@ -226,6 +251,23 @@ const CARDS=[
 ];
 const WHEEL=[C('大獎','大当たり',{money:300}),C('小獎','当たり',{money:150}),C('安慰獎','残念賞',{money:50}),C('銘謝惠顧','ハズレ',{money:0}),C('轉到破洞','穴に落ちた',{money:-100}),C('對方賠你','相手が払う',{give:100})];
 const LVMULT=[1,2,3.5,5];
+const CH=[
+ {id:'teemo', e:'🍄',n:{zh:'提莫',ja:'ティーモ'},        d:{zh:'蘑菇陷阱：對手踩你的地，租金 +50%',ja:'キノコ：相手が自分の土地に止まると家賃 +50%'}},
+ {id:'sivir', e:'⚡',n:{zh:'希維爾',ja:'シヴィア'},      d:{zh:'獵殺頌歌：經過起點多拿 $60',ja:'狩人の賛歌：スタート通過で +$60'}},
+ {id:'singed',e:'☠️',n:{zh:'辛吉德',ja:'シンジド'},      d:{zh:'毒霧脫逃：付給對方的租金打 7 折',ja:'毒煙：相手に払う家賃が 30% オフ'}},
+ {id:'blitz', e:'🤖',n:{zh:'布里茨',ja:'ブリッツクランク'},d:{zh:'蒸汽手臂：買地打 85 折',ja:'スチームアーム：土地の購入が 15% オフ'}},
+ {id:'sion',  e:'💀',n:{zh:'塞恩',ja:'サイオン'},        d:{zh:'不死之軀：免疫罰站（罰站區 +$80），單次租金最多付 $250',ja:'不死の体：おしおき無効（おしおきマスで +$80）、家賃は1回 $250 まで'}},
+ {id:'yuumi', e:'🐱',n:{zh:'悠咪',ja:'ユーミ'},          d:{zh:'治療：每回合開始 +$10',ja:'ヒール：毎ターン開始時 +$10'}},
+ {id:'draven',e:'🪓',n:{zh:'德萊文',ja:'ドレイヴン'},    d:{zh:'接斧頭：骰子出現 6 就 +$80（經典模式 +$40）',ja:'斧キャッチ：サイコロで 6 が出たら +$80（クラシックは +$40）'}},
+ {id:'bard',  e:'🔔',n:{zh:'巴德',ja:'バード'},          d:{zh:'守護鐘聲：轉盤只會是好結果，機會卡的扣錢減半',ja:'守護の鐘：ルーレットは必ず良い結果、チャンスカードの損失は半分'}},
+ {id:'lulu',  e:'🧚',n:{zh:'露璐',ja:'ルル'},            d:{zh:'變小小：稅金只付一半，升級費用也半價',ja:'ちっちゃくなーれ：税金は半分、アップグレードも半額'}},
+ {id:'amumu', e:'😢',n:{zh:'阿姆姆',ja:'アムム'},        d:{zh:'哭哭：資產落後時，經過起點多拿 $100',ja:'なきむし：資産で負けているとき、スタート通過で +$100'}},
+];
+function chOf(pi){return CH[st.players[pi].ch]}
+function has(pi,id){return chOf(pi).id===id}
+function goBonus(pi){let b=200; if(has(pi,'sivir')) b+=60; if(has(pi,'amumu')&&worth(pi)<worth(other(pi))) b+=100; return b;}
+function buyPrice(i,pi){const p=tiles()[i].p; return has(pi,'blitz')?Math.round(p*0.85/10)*10:p;}
+function propCount(pi){return Object.values(st.owners).filter(o=>o.owner===pi).length}
 
 
 /* ---------- 語言 ---------- */
@@ -239,12 +281,12 @@ zh:{
  note:'兩支手機模式：把連結傳給對方，房主選模式開房，對方輸入房號加入。兩支手機最好連同一個 Wi-Fi。語言可以各自選。',
  e_storage:'這個環境沒有連線功能，請改用「同一支手機」模式。',e_disc:'連線中斷了。兩支手機請連同一個 Wi-Fi，然後重新開房。',connecting:'連線中…',e_name:'先填你的名字。',e_create:'建立房間失敗，請再試一次。',e_code:'房號是 4 位數字。',e_notfound:'找不到這個房號，確認一下對方有沒有開房。',e_started:'這間房已經開始了。',
  lobby_title:'房間已開',lobby_sub:'把這個房號告訴對方，讓對方在首頁輸入加入。',waiting:'等待對方加入…',joined:'{n} 已加入，可以開始。',guestWait:'已加入 {n} 的房間，等房主按開始…',start:'開始遊戲',leave:'回首頁',
- m_quick:'快速模式',m_classic:'經典模式',room:'房號',onePhone:'同一支手機',round:'第 {r} / {m} 回合',you:'（你）',worth:'總資產',skipping:'罰站中',boosted:'加速中',
+ m_quick:'快速模式',m_classic:'經典模式',room:'房號',onePhone:'同一支手機',round:'第 {r} / {m} 回合',you:'（你）',worth:'總資產',props:'地產',skipping:'罰站中',boosted:'加速中',
  over:'遊戲結束',turnOf:'<b>{n}</b> 的回合',waitFor:'等 <b>{n}</b> 走完',moving:'走路中…',yourTurn:'<b>{n}</b>，換你了。',passPhone:'把手機交給 <b>{n}</b>，換你了。',roll:'擲骰子',
  buyQ:'「<b>{t}</b>」沒人買，要用 ${p} 買下嗎？',buy:'買下',noBuy:'不買',upQ:'「<b>{t}</b>」可以升級（${c}），租金會從 ${a} 漲到 ${b}。',up:'升級',noUp:'先不要',end:'結束回合',waitTurn:'輪到 <b>{n}</b>，稍等一下。',
  draw:'平手！',wins:'{n} 贏了！',drawSub:'兩人資產一樣多，改天再分勝負。',winSub:'輸的人負責今晚的家事（規則自訂）。',again:'再來一局',hostAgain:'等房主開下一局…',home:'回首頁',
  tile:{go:'起點',chance:'機會',tax:'稅務局',rest:'咖啡休息',jail:'罰站區',wheel:'幸運轉盤'},
- log:{start:'遊戲開始！後手多拿 $100 補償。',again:'新的一局開始！後手多拿 $100 補償。',roll:'{n} 擲出 {s}',boost:'{n} 希維爾加速中！移動距離加倍，走 {s} 格',passGo:'{n} 經過起點，領 $200',
+ log:{start:'遊戲開始！後手多拿 $100 補償。',again:'新的一局開始！後手多拿 $100 補償。',roll:'{n} 擲出 {s}',pick:'{n} 的角色是 {e} {c}：{d}',immune:'{n} 有不死之軀，罰站無效（+$80）',heal:'{n} 的治療 +$10',axe:'{n} 接住斧頭！+${a}',boost:'{n} 希維爾加速中！移動距離加倍，走 {s} 格',passGo:'{n} 經過起點，領 ${b}',
   canBuy:'{n} 來到「{t}」，可以用 ${p} 買下',poor:'{n} 來到「{t}」，但錢不夠買',rent:'{n} 踩到 {o} 的「{t}」，付租金 ${r}',canUp:'{n} 回到自己的「{t}」，可以花 ${c} 升級',back:'{n} 回到自己的「{t}」',
   chance:'{n} 抽到機會：{c}',tax:'{n} 被稅務局收走 ${a}',jail:'{n} 被罰站，下一回合暫停',wheel:'{n} 轉到「{w}」',rest:'{n} 在咖啡店休息一下',go:'{n} 停在起點',
   sell:'{n} 錢不夠，賣掉「{t}」換回 ${v}',bankrupt:'{n} 破產了！',skip:'{n} 這回合罰站，跳過',bought:'{n} 買下了「{t}」',upgraded:'{n} 把「{t}」升到 {l} 級',settle:'{m} 回合結束！結算資產：{a} ${x}、{b} ${y}'}
@@ -258,12 +300,12 @@ ja:{
  note:'スマホ2台モード：リンクを相手に送り、ホストがモードを選んで部屋を作り、相手は部屋番号を入力して参加します。ふたりとも同じWi-Fiにつなぐのがおすすめ。言語はそれぞれ選べます。',
  e_storage:'この環境ではオンライン接続が使えません。「スマホ1台」モードをお使いください。',e_disc:'接続が切れました。ふたりとも同じWi-Fiにつないで、部屋を作り直してください。',connecting:'接続中…',e_name:'先に名前を入力してください。',e_create:'部屋を作れませんでした。もう一度お試しください。',e_code:'部屋番号は4桁の数字です。',e_notfound:'その部屋番号が見つかりません。相手が部屋を作ったか確認してください。',e_started:'この部屋はすでに始まっています。',
  lobby_title:'部屋ができました',lobby_sub:'この番号を相手に伝えて、トップ画面で入力してもらってください。',waiting:'相手の参加を待っています…',joined:'{n} が参加しました。開始できます。',guestWait:'{n} の部屋に参加しました。ホストの開始を待っています…',start:'ゲーム開始',leave:'トップへ戻る',
- m_quick:'クイック',m_classic:'クラシック',room:'部屋',onePhone:'スマホ1台',round:'ラウンド {r} / {m}',you:'（あなた）',worth:'総資産',skipping:'1回休み中',boosted:'加速中',
+ m_quick:'クイック',m_classic:'クラシック',room:'部屋',onePhone:'スマホ1台',round:'ラウンド {r} / {m}',you:'（あなた）',worth:'総資産',props:'土地',skipping:'1回休み中',boosted:'加速中',
  over:'ゲーム終了',turnOf:'<b>{n}</b> のターン',waitFor:'<b>{n}</b> の番です',moving:'移動中…',yourTurn:'<b>{n}</b>、あなたの番です。',passPhone:'スマホを <b>{n}</b> に渡してください。',roll:'サイコロを振る',
  buyQ:'「<b>{t}</b>」は空き地。${p} で買いますか？',buy:'買う',noBuy:'買わない',upQ:'「<b>{t}</b>」を ${c} でアップグレードできます。家賃が ${a} → ${b} に。',up:'アップグレード',noUp:'やめておく',end:'ターン終了',waitTurn:'<b>{n}</b> の番です。少しお待ちください。',
  draw:'引き分け！',wins:'{n} の勝ち！',drawSub:'資産が同じ。勝負はまた今度。',winSub:'負けた人が今夜の家事担当（ルールはご自由に）。',again:'もう一局',hostAgain:'ホストが次のゲームを始めるのを待っています…',home:'トップへ戻る',
  tile:{go:'スタート',chance:'チャンス',tax:'税務署',rest:'カフェ休憩',jail:'おしおき',wheel:'ルーレット'},
- log:{start:'ゲーム開始！後手は補償として $100 多くもらえます。',again:'次のゲーム開始！後手は補償として $100 多くもらえます。',roll:'{n} が {s} を出した',boost:'{n} はシヴィアの加速中！移動距離2倍で {s} マス進む',passGo:'{n} がスタートを通過、$200 受け取り',
+ log:{start:'ゲーム開始！後手は補償として $100 多くもらえます。',again:'次のゲーム開始！後手は補償として $100 多くもらえます。',roll:'{n} が {s} を出した',pick:'{n} のキャラは {e} {c}：{d}',immune:'{n} は不死の体。おしおき無効（+$80）',heal:'{n} のヒール +$10',axe:'{n} が斧をキャッチ！+${a}',boost:'{n} はシヴィアの加速中！移動距離2倍で {s} マス進む',passGo:'{n} がスタートを通過、${b} 受け取り',
   canBuy:'{n} が「{t}」に到着。${p} で買える',poor:'{n} が「{t}」に到着したが、お金が足りない',rent:'{n} が {o} の「{t}」に止まり、家賃 ${r} を支払い',canUp:'{n} が自分の「{t}」に戻った。${c} でアップグレード可能',back:'{n} が自分の「{t}」に戻った',
   chance:'{n} がチャンスカード：{c}',tax:'{n} が税務署に ${a} 取られた',jail:'{n} がおしおき。次のターンは休み',wheel:'{n} のルーレット：「{w}」',rest:'{n} はカフェでひと休み',go:'{n} がスタートに止まった',
   sell:'{n} はお金が足りず、「{t}」を売って ${v} 回収',bankrupt:'{n} が破産！',skip:'{n} はおしおき中、このターンは休み',bought:'{n} が「{t}」を購入',upgraded:'{n} が「{t}」をレベル {l} に',settle:'{m} ラウンド終了！資産結果：{a} ${x}、{b} ${y}'}
@@ -274,7 +316,7 @@ const S=()=>STR[lang];
 function fmt(tpl,p){return tpl.replace(/\{(\w+)\}/g,(m,k)=>p&&p[k]!=null?esc(p[k]):m)}
 function T(k,p){return fmt(S()[k],p)}
 function tileName(i){const t=tiles()[i];return t.n?t.n[lang]:S().tile[t.t]}
-function logText(e){const p=Object.assign({},e.p||{});if(p.ti!=null)p.t=tileName(p.ti);if(p.ci!=null)p.c=CARDS[p.ci].txt[lang];if(p.wi!=null)p.w=WHEEL[p.wi].txt[lang];return fmt(S().log[e.k],p)}
+function logText(e){const p=Object.assign({},e.p||{});if(p.ti!=null)p.t=tileName(p.ti);if(p.ci!=null)p.c=CARDS[p.ci].txt[lang];if(p.wi!=null)p.w=WHEEL[p.wi].txt[lang];if(p.chi!=null){p.e=CH[p.chi].e;p.c=CH[p.chi].n[lang];p.d=CH[p.chi].d[lang];}return fmt(S().log[e.k],p)}
 function applyLang(){
   $('html').lang=lang==='ja'?'ja':'zh-Hant';
   document.querySelectorAll('[data-i]').forEach(e=>e.innerHTML=S()[e.dataset.i]);
@@ -300,19 +342,21 @@ function newState(mode,names){
   const c=CFG[mode];
   return {
     mode, phase:'lobby', seq:1, code:net.code, guestJoined:false,
-    players:[{name:names[0]||'玩家一',money:c.start,pos:0,skip:0},{name:names[1]||'玩家二',money:c.start+100,pos:0,skip:0}],
+    players:[{name:names[0]||'玩家一',money:c.start,pos:0,skip:0,ch:0},{name:names[1]||'玩家二',money:c.start+100,pos:0,skip:0,ch:1}],
     owners:{}, turn:0, round:1, step:'roll', pending:null, dice:[], winner:null, log:[]
   };
 }
 function tiles(){return TILES[st.mode]}
+function assignCh(){const a=rnd(CH.length); let b=rnd(CH.length-1); if(b>=a) b++; st.players[0].ch=a; st.players[1].ch=b;}
+function logPicks(){ st.players.forEach(p=>log('pick',{n:p.name,chi:p.ch})); }
 function cfg(){return CFG[st.mode]}
 function log(k,p){st.log.unshift({k,p}); if(st.log.length>30) st.log.length=30;}
 function groupTiles(g){return tiles().map((t,i)=>t.g===g?i:-1).filter(i=>i>=0)}
 function ownsGroup(pi,g){return groupTiles(g).every(i=>st.owners[i]&&st.owners[i].owner===pi)}
 function rentAt(i,owner,level){const t=tiles()[i];let base=Math.round(t.p*(st.mode==='classic'?0.5:0.35)/10)*10;if(ownsGroup(owner,t.g))base*=2;return Math.round(base*LVMULT[level]/10)*10}
 function rentOf(i){const o=st.owners[i];return rentAt(i,o.owner,o.level)}
-function upCost(i){return tiles()[i].p/2}
-function worth(pi){let w=st.players[pi].money;for(const i in st.owners){const o=st.owners[i];if(o.owner===pi)w+=tiles()[i].p+o.level*upCost(i)}return w}
+function upCost(i,pi){const c=tiles()[i].p/2; return (pi!=null&&has(pi,'lulu'))?Math.round(c*0.5/10)*10:c;}
+function worth(pi){let w=st.players[pi].money;for(const i in st.owners){const o=st.owners[i];if(o.owner===pi)w+=tiles()[i].p+o.level*(tiles()[i].p/2)}return w}
 function other(pi){return 1-pi}
 
 function pay(pi,amt,to){
@@ -326,14 +370,14 @@ function pay(pi,amt,to){
 function applyFx(pi,fx){
   const p=st.players[pi], q=st.players[other(pi)], N=tiles().length;
   let mv=0, re=false;
-  if(fx.money) { if(fx.money>0) p.money+=fx.money; else pay(pi,-fx.money,null); }
+  if(fx.money) { if(fx.money>0) p.money+=fx.money; else pay(pi,has(pi,'bard')?Math.round(-fx.money/2/10)*10:-fx.money,null); }
   if(fx.give) pay(other(pi),fx.give,pi);
   if(fx.lose) pay(pi,fx.lose,other(pi));
   if(fx.both){ p.money+=fx.both; q.money+=fx.both; }
-  if(fx.jail) p.skip=1;
+  if(fx.jail){ if(has(pi,'sion')) log('immune',{n:p.name}); else p.skip=1; }
   if(fx.jailOther) q.skip=1;
   if(fx.boost) p.boost=1;
-  if(fx.goto!=null){ p.pos=fx.goto; if(fx.goto===0) p.money+=200; }
+  if(fx.goto!=null){ p.pos=fx.goto; if(fx.goto===0) p.money+=goBonus(pi); }
   if(fx.gotoNoPay!=null){ p.pos=fx.gotoNoPay; }
   if(fx.teleport){ p.pos=rnd(N); re=true; }
   if(fx.gotoOpp){ p.pos=q.pos; re=true; }
@@ -346,18 +390,18 @@ function land(pi,depth){
   st.pending=null;
   if(t.t==='prop'){
     const o=st.owners[i];
-    if(!o){ if(p.money>=t.p){ st.pending={type:'buy',tile:i}; log('canBuy',{n:p.name,ti:i,p:t.p}); } else log('poor',{n:p.name,ti:i}); }
-    else if(o.owner!==pi){ const r=rentOf(i); log('rent',{n:p.name,o:st.players[o.owner].name,ti:i,r}); pay(pi,r,o.owner); }
-    else { if(ownsGroup(pi,t.g)&&o.level<3&&p.money>=upCost(i)){ st.pending={type:'up',tile:i}; log('canUp',{n:p.name,ti:i,c:upCost(i)}); } else log('back',{n:p.name,ti:i}); }
+    if(!o){ if(p.money>=buyPrice(i,pi)){ st.pending={type:'buy',tile:i}; log('canBuy',{n:p.name,ti:i,p:buyPrice(i,pi)}); } else log('poor',{n:p.name,ti:i}); }
+    else if(o.owner!==pi){ let r=rentOf(i); if(has(o.owner,'teemo')) r*=1.5; if(has(pi,'singed')) r*=0.7; r=Math.round(r/10)*10; if(has(pi,'sion')) r=Math.min(r,250); log('rent',{n:p.name,o:st.players[o.owner].name,ti:i,r}); pay(pi,r,o.owner); }
+    else { if(ownsGroup(pi,t.g)&&o.level<3&&p.money>=upCost(i,pi)){ st.pending={type:'up',tile:i}; log('canUp',{n:p.name,ti:i,c:upCost(i,pi)}); } else log('back',{n:p.name,ti:i}); }
   } else if(t.t==='chance'){
     const ci=rnd(CARDS.length),c=CARDS[ci]; log('chance',{n:p.name,ci});
     const r=applyFx(pi,c.fx);
     if(st.phase==='over') return;
     if(r.mv&&depth<1){ p.pos=(p.pos+r.mv+tiles().length)%tiles().length; land(pi,depth+1); return; }
     if(r.re&&depth<1){ if(tiles()[p.pos].t!=='chance') land(pi,depth+1); return; }
-  } else if(t.t==='tax'){ log('tax',{n:p.name,a:t.a}); pay(pi,t.a,null); }
-  else if(t.t==='jail'){ p.skip=1; log('jail',{n:p.name}); }
-  else if(t.t==='wheel'){ const wi=rnd(WHEEL.length),w=WHEEL[wi]; log('wheel',{n:p.name,wi}); applyFx(pi,w.fx); }
+  } else if(t.t==='tax'){ const a=has(pi,'lulu')?t.a/2:t.a; log('tax',{n:p.name,a}); pay(pi,a,null); }
+  else if(t.t==='jail'){ if(has(pi,'sion')){ p.money+=80; log('immune',{n:p.name}); } else { p.skip=1; log('jail',{n:p.name}); } }
+  else if(t.t==='wheel'){ let wi=rnd(WHEEL.length); if(has(pi,'bard')){ const good=WHEEL.map((w,k)=>(w.fx.money>0||w.fx.give)?k:-1).filter(k=>k>=0); wi=good[rnd(good.length)]; } const w=WHEEL[wi]; log('wheel',{n:p.name,wi}); applyFx(pi,w.fx); }
   else if(t.t==='rest'){ log('rest',{n:p.name}); }
   else if(t.t==='go'){ log('go',{n:p.name}); }
 }
@@ -369,6 +413,7 @@ function endTurn(){
     if(cfg().maxRounds&&st.round>cfg().maxRounds){ st.phase='over'; const w0=worth(0),w1=worth(1); st.winner=w0===w1?null:(w0>w1?0:1); log('settle',{m:cfg().maxRounds,a:st.players[0].name,x:w0,b:st.players[1].name,y:w1}); return; }
     const p=st.players[st.turn];
     if(p.skip>0){ p.skip--; log('skip',{n:p.name}); guard++; continue; }
+    if(has(st.turn,'yuumi')){ p.money+=10; log('heal',{n:p.name}); }
     break;
   }while(guard<3);
 }
@@ -434,7 +479,8 @@ function render(){
   const c=cfg();
   $('g-mode').textContent=T('m_'+st.mode)+'・'+(net.online?T('room')+' '+net.code:T('onePhone'));
   $('g-round').textContent=T('round',{r:Math.min(st.round,c.maxRounds),m:c.maxRounds});
-  $('g-players').innerHTML=st.players.map((p,i)=>`<div class="pl ${st.turn===i&&st.phase==='play'?'turn':''}"><span class="dot p${i}"></span><div style="min-width:0"><div class="nm">${esc(p.name)}${net.online&&net.me===i?T('you'):''}</div><div class="money">$${p.money}</div><div class="worth">${T('worth')} $${worth(i)}${p.skip?'・'+T('skipping'):''}${p.boost?'・'+T('boosted'):''}</div></div></div>`).join('');
+  $('g-players').innerHTML=st.players.map((p,i)=>{const ch=CH[p.ch], on=st.turn===i&&st.phase==='play';
+    return `<div class="pl ${on?'turn':''}"><div class="av p${i} ${on?'pulse':''}">${ch.e}</div><div class="info"><div class="nm">${esc(p.name)}${net.online&&net.me===i?T('you'):''} <span class="ch">${ch.n[lang]}</span></div><div class="skill">${ch.d[lang]}${p.skip?'・'+T('skipping'):''}${p.boost?'・'+T('boosted'):''}</div></div><div class="right"><div class="money">$${p.money}</div><div class="cnt">${T('props')} <b>${propCount(i)}</b>・${T('worth')} $${worth(i)}</div></div></div>`;}).join('');
   renderBoard();
   renderPanel();
   $('log').innerHTML=st.log.map(l=>`<div>${logText(l)}</div>`).join('');
@@ -442,8 +488,9 @@ function render(){
 function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 
 const RING={quick:{cols:4,rows:8},classic:{cols:6,rows:12}};
+const snakeCols=()=>st.mode==='quick'?3:4;
 function cellOf(i){
-  if(layout==='snake'){ const r=Math.floor(i/4), c=(r%2===0)?(i%4):(3-i%4); return {r,c}; }
+  if(layout==='snake'){ const n=snakeCols(), r=Math.floor(i/n), c=(r%2===0)?(i%n):(n-1-i%n); return {r,c}; }
   const {cols,rows}=RING[st.mode];
   if(i<cols) return {r:0,c:i};
   if(i<cols+rows-2) return {r:i-cols+1,c:cols-1};
@@ -453,7 +500,7 @@ function cellOf(i){
 function dirOf(i,N){
   if(layout==='snake'){
     if(i===N-1) return ['↺',true];
-    const r=Math.floor(i/4), last=(i%4===3);
+    const n=snakeCols(), r=Math.floor(i/n), last=(i%n===n-1);
     if(last) return ['↓',true];
     return [r%2===0?'→':'←',false];
   }
@@ -470,7 +517,7 @@ function dirOf(i,N){
 function renderBoard(){
   const TT=tiles(), N=TT.length;
   const b=$('board'); b.className='board '+layout+' '+st.mode;
-  const cols=layout==='snake'?4:RING[st.mode].cols, rows=layout==='snake'?Math.ceil(N/4):RING[st.mode].rows;
+  const cols=layout==='snake'?snakeCols():RING[st.mode].cols, rows=layout==='snake'?Math.ceil(N/snakeCols()):RING[st.mode].rows;
   b.style.gridTemplateColumns=`repeat(${cols},1fr)`;
   let h='';
   TT.forEach((t,i)=>{
@@ -479,7 +526,7 @@ function renderBoard(){
     const cls=['tile',t.t!=='prop'?'corner':'',o?'own'+o.owner:'',hot?'hot':''].join(' ');
     const band=t.t==='prop'?`<div class="band" style="background:var(--g${t.g})"></div>`:'<div class="band" style="background:transparent"></div>';
     const sub=t.t==='prop'?(o?`<span class="lv">${'▲'.repeat(o.level)||'&nbsp;'}</span>`:`<span class="tp">$${t.p}</span>`):(t.t==='tax'?`<span class="tp">-$${t.a}</span>`:'');
-    const tk=st.players.map((p,pi)=>p.pos===i?`<span class="tk p${pi}"></span>`:'').join('');
+    const tk=st.players.map((p,pi)=>p.pos===i?`<span class="tk p${pi} ${st.turn===pi&&st.phase==='play'?'pulse':''}">${CH[p.ch].e}</span>`:'').join('');
     const [ar,turn]=dirOf(i,N);
     h+=`<div class="${cls}" style="grid-row:${r+1};grid-column:${c+1}">${band}<span class="idx">${i+1}</span><span class="dir ${turn?'turn':''}">${ar}</span><span class="tn">${tileName(i)}</span>${sub}${tk}</div>`;
   });
@@ -519,15 +566,17 @@ function renderPanel(){
     $('b-roll').onclick=roll;
   } else if(st.pending&&st.pending.type==='buy'){
     const t=tiles()[st.pending.tile];
-    say.innerHTML=T('buyQ',{t:tileName(st.pending.tile),p:t.p});
+    const bp=buyPrice(st.pending.tile,st.turn);
+    say.innerHTML=T('buyQ',{t:tileName(st.pending.tile),p:bp});
     act.innerHTML=`<button class="primary" id="b-yes">${T('buy')}</button><button id="b-no">${T('noBuy')}</button>`;
-    $('b-yes').onclick=()=>{ st.owners[st.pending.tile]={owner:st.turn,level:0}; pay(st.turn,t.p,null); log('bought',{n:p.name,ti:st.pending.tile}); st.pending=null; finish(); };
+    $('b-yes').onclick=()=>{ st.owners[st.pending.tile]={owner:st.turn,level:0}; pay(st.turn,bp,null); log('bought',{n:p.name,ti:st.pending.tile}); st.pending=null; finish(); };
     $('b-no').onclick=()=>{ st.pending=null; finish(); };
   } else if(st.pending&&st.pending.type==='up'){
     const i=st.pending.tile,t=tiles()[i];
-    say.innerHTML=T('upQ',{t:tileName(i),c:upCost(i),a:rentOf(i),b:rentAt(i,st.turn,st.owners[i].level+1)});
+    const uc=upCost(i,st.turn);
+    say.innerHTML=T('upQ',{t:tileName(i),c:uc,a:rentOf(i),b:rentAt(i,st.turn,st.owners[i].level+1)});
     act.innerHTML=`<button class="primary" id="b-yes">${T('up')}</button><button id="b-no">${T('noUp')}</button>`;
-    $('b-yes').onclick=()=>{ pay(st.turn,upCost(i),null); st.owners[i].level++; log('upgraded',{n:p.name,ti:i,l:st.owners[i].level}); st.pending=null; finish(); };
+    $('b-yes').onclick=()=>{ pay(st.turn,uc,null); st.owners[i].level++; log('upgraded',{n:p.name,ti:i,l:st.owners[i].level}); st.pending=null; finish(); };
     $('b-no').onclick=()=>{ st.pending=null; finish(); };
   } else {
     say.innerHTML=st.log[0]?logText(st.log[0]):'';
@@ -548,7 +597,8 @@ async function roll(){
   }
   let steps=d.reduce((a,b)=>a+b,0);
   if(p.boost){ p.boost=0; steps*=2; log('boost',{n:p.name,s:steps}); } else log('roll',{n:p.name,s:steps});
-  for(let k=0;k<steps;k++){ p.pos=(p.pos+1)%TT.length; if(p.pos===0){ p.money+=200; log('passGo',{n:p.name}); } if(!reduce){ renderBoard(); await sleep(140); } }
+  if(has(st.turn,'draven')&&d.some(x=>x===6)){ const ax=st.mode==='quick'?80:40; p.money+=ax; log('axe',{n:p.name,a:ax}); }
+  for(let k=0;k<steps;k++){ p.pos=(p.pos+1)%TT.length; if(p.pos===0){ const gb=goBonus(st.turn); p.money+=gb; log('passGo',{n:p.name,b:gb}); } if(!reduce){ renderBoard(); await sleep(140); } }
   busy=false;
   land(st.turn,0);
   if(st.phase==='over'){ render(); push(); return; }
@@ -571,7 +621,7 @@ $('b-create').onclick=async()=>{
   if(homeConn==='local'){
     net={online:false,code:'',me:0};
     const n2=$('name2').value.trim()||(lang==='ja'?'プレイヤー2':'玩家二');
-    st=newState(homeMode,[name||(lang==='ja'?'プレイヤー1':'玩家一'),n2]); st.phase='play'; log('start'); render(); return;
+    st=newState(homeMode,[name||(lang==='ja'?'プレイヤー1':'玩家一'),n2]); assignCh(); st.phase='play'; logPicks(); log('start'); render(); return;
   }
   if(!netOK()){ $('home-err').textContent=T('e_storage'); return; }
   if(!name){ $('home-err').textContent=T('e_name'); return; }
@@ -609,7 +659,7 @@ $('b-join').onclick=async()=>{
   $('home-err').textContent='';
   render(); startPolling();
 };
-$('b-start').onclick=async()=>{ st.phase='play'; log('start'); render(); await push(); };
+$('b-start').onclick=async()=>{ assignCh(); st.phase='play'; logPicks(); log('start'); render(); await push(); };
 $('b-leave').onclick=goHome;
 
 function renderLobby(){
@@ -621,7 +671,7 @@ function renderLobby(){
 }
 function again(){
   const names=st.players.map(p=>p.name), seq=st.seq;
-  st=newState(st.mode,names); st.seq=seq; st.phase='play'; st.guestJoined=true; log('again');
+  st=newState(st.mode,names); st.seq=seq; assignCh(); st.phase='play'; st.guestJoined=true; logPicks(); log('again');
   render(); push();
 }
 function goHome(){ stopPolling(); st=null; net={online:false,code:'',me:0}; show('s-home'); applyLang(); }
