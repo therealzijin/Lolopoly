@@ -9,7 +9,7 @@
 :root{
   --felt:#234B48; --felt-dark:#1B3B39; --felt-line:#2F5F5B;
   --paper:#FFF4DE; --paper-dim:#EFE2C8; --ink:#2B2420; --ink-soft:#6B5F58;
-  --p0:#FF6B57; --p1:#4D9DE0; --gold:#F2C14E;
+  --p0:#FF6B57; --p1:#4D9DE0; --p2:#7ED321; --p3:#B57BEE; --gold:#F2C14E;
   --g粉:#F7A1C4; --g橘:#FFA25B; --g黃:#F2D45C; --g綠:#7ED3A3; --g藍:#7FB6F0; --g紫:#C39BF2; --g金:#F2C14E;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -26,7 +26,6 @@ button:disabled{opacity:.4;cursor:default}
 button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 button.primary{background:var(--gold)}
 button.ghost{background:transparent;color:var(--paper);border:2px solid var(--felt-line)}
-button.p0{background:var(--p0);color:#fff} button.p1{background:var(--p1);color:#fff}
 input{font:inherit;width:100%;padding:12px 14px;border-radius:12px;border:2px solid var(--felt-line);background:var(--felt-dark);color:var(--paper);font-size:17px}
 input:focus{outline:none;border-color:var(--gold)}
 .screen{display:none}.screen.on{display:block}
@@ -50,7 +49,9 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
 .pl{background:var(--felt-dark);border-radius:12px;padding:7px 10px;border:2px solid transparent;display:flex;align-items:center;gap:10px}
 .pl.turn{border-color:var(--paper)}
 .av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;border:3px solid;flex:none;background:#0f2422}
-.av.p0{border-color:var(--p0)} .av.p1{border-color:var(--p1)}
+.av.p0{border-color:var(--p0)} .av.p1{border-color:var(--p1)} .av.p2{border-color:var(--p2)} .av.p3{border-color:var(--p3)}
+.pl.out{opacity:.45}
+.badge{display:inline-block;font-size:9px;font-weight:800;background:var(--felt-line);color:var(--paper);border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}
 .pl .info{flex:1;min-width:0}
 .pl .nm{font-weight:700;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl .nm .ch{font-weight:500;color:#BFD3CF;font-size:12px}
@@ -74,12 +75,14 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
 .board.classic .tile .tn{font-size:11.5px;padding-top:4px} .board.classic .tile .tp,.board.classic .tile .lv{font-size:11px}
 .board.ring.classic .tile .tn{font-size:10px} .board.ring.classic .tile .tp,.board.ring.classic .tile .lv{font-size:10px}
 .tile.corner{background:var(--paper-dim)}
-.tile.own0{box-shadow:inset 0 0 0 3px var(--p0);background:#FFE7E2} .tile.own1{box-shadow:inset 0 0 0 3px var(--p1);background:#E2EEFB}
-.tile.own0 .band{background:var(--p0)!important} .tile.own1 .band{background:var(--p1)!important}
-.tile.own0 .lv{color:#B3321F} .tile.own1 .lv{color:#1F5FA8}
+.tile.own0{box-shadow:inset 0 0 0 3px var(--p0);background:#FFE7E2} .tile.own1{box-shadow:inset 0 0 0 3px var(--p1);background:#E2EEFB} .tile.own2{box-shadow:inset 0 0 0 3px var(--p2);background:#EAF7DB} .tile.own3{box-shadow:inset 0 0 0 3px var(--p3);background:#F0E6FB}
+.tile.own0 .band{background:var(--p0)!important} .tile.own1 .band{background:var(--p1)!important} .tile.own2 .band{background:var(--p2)!important} .tile.own3 .band{background:var(--p3)!important}
+.tile.own0 .lv{color:#B3321F} .tile.own1 .lv{color:#1F5FA8} .tile.own2 .lv{color:#3F7A12} .tile.own3 .lv{color:#6A3AA8}
 .tile.hot{box-shadow:inset 0 0 0 3px var(--gold)}
-.tk{position:absolute;bottom:3px;width:24px;height:24px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.4)}
-.tk.p0{background:var(--p0);left:4px} .tk.p1{background:var(--p1);right:4px}
+.tk{position:absolute;bottom:3px;width:22px;height:22px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.tk.p0{background:var(--p0)} .tk.p1{background:var(--p1)} .tk.p2{background:var(--p2)} .tk.p3{background:var(--p3)}
+.tk.s0{left:3px} .tk.s1{left:26px} .tk.s2{right:26px} .tk.s3{right:3px}
+.rank{list-style:none;text-align:left;margin:0 auto 14px;max-width:260px}.rank li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed var(--paper-dim);font-size:15px}.rank li b{color:var(--ink)}
 .die{width:48px;height:48px;border-radius:10px;background:var(--paper);color:var(--ink);font-size:40px;line-height:48px;font-weight:800;text-align:center}
 .die.roll{animation:shake .5s linear infinite}
 @keyframes shake{0%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}100%{transform:rotate(0)}}
@@ -89,22 +92,6 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
 .mid{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;color:var(--paper);font-size:14px;line-height:1.4}
 .mid b{color:var(--gold)}
 .mid .last{font-size:12px;color:#BFD3CF;margin-top:6px}
-.tile .band{width:100%;height:7px;flex:none}
-.tile .idx{position:absolute;top:8px;left:4px;font-size:9px;color:var(--ink-soft);opacity:.7}
-.tile .tn{font-size:12px;font-weight:700;line-height:1.15;text-align:center;padding:4px 3px 0;word-break:break-all}
-.board.snake.classic .tile .tn{font-size:11px;padding-top:3px}
-.tile .tp{font-size:11px;color:var(--ink-soft);line-height:1.2;margin-top:1px}
-.tile .lv{font-size:11px;line-height:1.2;margin-top:1px;color:var(--ink)}
-.tile.corner{background:var(--paper-dim)}
-.tile.own0{box-shadow:inset 0 0 0 3px var(--p0)} .tile.own1{box-shadow:inset 0 0 0 3px var(--p1)}
-.tile.own0 .band{background:var(--p0)!important} .tile.own1 .band{background:var(--p1)!important}
-.tile.hot{box-shadow:inset 0 0 0 3px var(--gold);background:#FFFBEF}
-.tk{position:absolute;bottom:3px;width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}
-.tk.p0{background:var(--p0);left:4px} .tk.p1{background:var(--p1);right:4px}
-.die{width:48px;height:48px;border-radius:10px;background:var(--paper);color:var(--ink);font-size:40px;line-height:48px;font-weight:800;text-align:center}
-.die.roll{animation:shake .5s linear infinite}
-@keyframes shake{0%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}100%{transform:rotate(0)}}
-@media(prefers-reduced-motion:reduce){.die.roll{animation:none}}
 .panel{margin-top:12px;background:var(--felt-dark);border-radius:16px;padding:12px 14px}
 .panel .say{font-size:15px;line-height:1.45;min-height:1.4em;margin-bottom:10px}
 .panel .say b{color:var(--gold)}
@@ -146,6 +133,13 @@ h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:8
       <button data-v="ring"><span data-i="ring"></span><small data-i="ring_s"></small></button>
       <button data-v="snake"><span data-i="snake"></span><small data-i="snake_s"></small></button>
     </div>
+  </div>
+
+  <div class="field"><label data-i="npc"></label>
+    <div class="seg" id="seg-npc">
+      <button data-v="0" class="sel">0</button><button data-v="1">1</button><button data-v="2">2</button>
+    </div>
+    <p class="note" style="margin-top:6px" data-i="npc_s"></p>
   </div>
 
   <div class="field" id="f-mode"><label data-i="mode"></label>
@@ -263,9 +257,10 @@ const CH=[
  {id:'lulu',  e:'🧚',n:{zh:'露璐',ja:'ルル'},            d:{zh:'變小小：稅金只付一半，升級費用也半價',ja:'ちっちゃくなーれ：税金は半分、アップグレードも半額'}},
  {id:'amumu', e:'😢',n:{zh:'阿姆姆',ja:'アムム'},        d:{zh:'哭哭：資產落後時，經過起點多拿 $100',ja:'なきむし：資産で負けているとき、スタート通過で +$100'}},
 ];
+const NPCS=[{zh:'小兵',ja:'ミニオン'},{zh:'波羅',ja:'ポロ'}];
 function chOf(pi){return CH[st.players[pi].ch]}
 function has(pi,id){return chOf(pi).id===id}
-function goBonus(pi){let b=200; if(has(pi,'sivir')) b+=60; if(has(pi,'amumu')&&worth(pi)<worth(other(pi))) b+=100; return b;}
+function goBonus(pi){let b=200; if(has(pi,'sivir')) b+=60; if(has(pi,'amumu')&&worth(pi)<Math.max(...active().filter(i=>i!==pi).map(worth))) b+=100; return b;}
 function buyPrice(i,pi){const p=tiles()[i].p; return has(pi,'blitz')?Math.round(p*0.85/10)*10:p;}
 function propCount(pi){return Object.values(st.owners).filter(o=>o.owner===pi).length}
 
@@ -276,7 +271,7 @@ zh:{
  title:'兩人大富翁',sub:'給你們兩個玩的小桌遊。各拿一支手機，開一間房就能開始。',
  myname:'你的名字',myname_ph:'例如：周',name2:'對方的名字',name2_ph:'例如：小美',
  how:'怎麼玩',online:'兩支手機',online_s:'各看自己的畫面',local:'同一支手機',local_s:'輪流傳給對方',
- layout:'棋盤排列',ring:'環形',ring_s:'繞一圈，方向清楚',snake:'蛇形',snake_s:'格子最大，來回走',mode:'模式',quick:'快速',quick_s:'20 格・15 回合・約 10 分',classic:'經典',classic_s:'32 格・最多 40 回合',
+ layout:'棋盤排列',ring:'環形',ring_s:'繞一圈，方向清楚',snake:'蛇形',snake_s:'格子最大，來回走',npc:'電腦玩家（NPC）',npc_s:'加 1～2 個電腦玩家一起玩，人多不容易一下子分出勝負。',npcTag:'NPC',mode:'模式',quick:'快速',quick_s:'20 格・15 回合・約 10 分',classic:'經典',classic_s:'32 格・最多 40 回合',
  create:'開新房間',startLocal:'開始遊戲',code_ph:'輸入 4 位房號',join:'加入',
  note:'兩支手機模式：把連結傳給對方，房主選模式開房，對方輸入房號加入。兩支手機最好連同一個 Wi-Fi。語言可以各自選。',
  e_storage:'這個環境沒有連線功能，請改用「同一支手機」模式。',e_disc:'連線中斷了。兩支手機請連同一個 Wi-Fi，然後重新開房。',connecting:'連線中…',e_name:'先填你的名字。',e_create:'建立房間失敗，請再試一次。',e_code:'房號是 4 位數字。',e_notfound:'找不到這個房號，確認一下對方有沒有開房。',e_started:'這間房已經開始了。',
@@ -284,18 +279,18 @@ zh:{
  m_quick:'快速模式',m_classic:'經典模式',room:'房號',onePhone:'同一支手機',round:'第 {r} / {m} 回合',you:'（你）',worth:'總資產',props:'地產',skipping:'罰站中',boosted:'加速中',
  over:'遊戲結束',turnOf:'<b>{n}</b> 的回合',waitFor:'等 <b>{n}</b> 走完',moving:'走路中…',yourTurn:'<b>{n}</b>，換你了。',passPhone:'把手機交給 <b>{n}</b>，換你了。',roll:'擲骰子',
  buyQ:'「<b>{t}</b>」沒人買，要用 ${p} 買下嗎？',buy:'買下',noBuy:'不買',upQ:'「<b>{t}</b>」可以升級（${c}），租金會從 ${a} 漲到 ${b}。',up:'升級',noUp:'先不要',end:'結束回合',waitTurn:'輪到 <b>{n}</b>，稍等一下。',
- draw:'平手！',wins:'{n} 贏了！',drawSub:'兩人資產一樣多，改天再分勝負。',winSub:'輸的人負責今晚的家事（規則自訂）。',again:'再來一局',hostAgain:'等房主開下一局…',home:'回首頁',
+ draw:'平手！',wins:'{n} 贏了！',drawSub:'資產一樣多，改天再分勝負。',winSub:'輸的人負責今晚的家事（規則自訂）。',again:'再來一局',hostAgain:'等房主開下一局…',home:'回首頁',
  tile:{go:'起點',chance:'機會',tax:'稅務局',rest:'咖啡休息',jail:'罰站區',wheel:'幸運轉盤'},
  log:{start:'遊戲開始！後手多拿 $100 補償。',again:'新的一局開始！後手多拿 $100 補償。',roll:'{n} 擲出 {s}',pick:'{n} 的角色是 {e} {c}：{d}',immune:'{n} 有不死之軀，罰站無效（+$80）',heal:'{n} 的治療 +$10',axe:'{n} 接住斧頭！+${a}',boost:'{n} 希維爾加速中！移動距離加倍，走 {s} 格',passGo:'{n} 經過起點，領 ${b}',
   canBuy:'{n} 來到「{t}」，可以用 ${p} 買下',poor:'{n} 來到「{t}」，但錢不夠買',rent:'{n} 踩到 {o} 的「{t}」，付租金 ${r}',canUp:'{n} 回到自己的「{t}」，可以花 ${c} 升級',back:'{n} 回到自己的「{t}」',
   chance:'{n} 抽到機會：{c}',tax:'{n} 被稅務局收走 ${a}',jail:'{n} 被罰站，下一回合暫停',wheel:'{n} 轉到「{w}」',rest:'{n} 在咖啡店休息一下',go:'{n} 停在起點',
-  sell:'{n} 錢不夠，賣掉「{t}」換回 ${v}',bankrupt:'{n} 破產了！',skip:'{n} 這回合罰站，跳過',bought:'{n} 買下了「{t}」',upgraded:'{n} 把「{t}」升到 {l} 級',settle:'{m} 回合結束！結算資產：{a} ${x}、{b} ${y}'}
+  sell:'{n} 錢不夠，賣掉「{t}」換回 ${v}',bankrupt:'{n} 破產了！',skip:'{n} 這回合罰站，跳過',bought:'{n} 買下了「{t}」',upgraded:'{n} 把「{t}」升到 {l} 級',settle:'{m} 回合結束！結算資產：{r}',npcTurn:'{n}（NPC）思考中…',out:'出局'}
 },
 ja:{
  title:'ふたりの大富豪すごろく',sub:'ふたり専用のミニボードゲーム。それぞれスマホを持って、部屋を作ればすぐ始められます。',
  myname:'あなたの名前',myname_ph:'例：なつ',name2:'相手の名前',name2_ph:'例：しゅう',
  how:'遊び方',online:'スマホ2台',online_s:'それぞれの画面で',local:'スマホ1台',local_s:'交代で回す',
- layout:'盤面の並び',ring:'ぐるり一周',ring_s:'方向がわかりやすい',snake:'ジグザグ',snake_s:'マスが一番大きい',mode:'モード',quick:'クイック',quick_s:'20マス・15ラウンド・約10分',classic:'クラシック',classic_s:'32マス・最大40ラウンド',
+ layout:'盤面の並び',ring:'ぐるり一周',ring_s:'方向がわかりやすい',snake:'ジグザグ',snake_s:'マスが一番大きい',npc:'コンピューター（NPC）',npc_s:'NPC を 1〜2 人追加できます。人数が多いほど勝負がすぐ決まりにくくなります。',npcTag:'NPC',mode:'モード',quick:'クイック',quick_s:'20マス・15ラウンド・約10分',classic:'クラシック',classic_s:'32マス・最大40ラウンド',
  create:'部屋を作る',startLocal:'ゲーム開始',code_ph:'4桁の部屋番号',join:'参加',
  note:'スマホ2台モード：リンクを相手に送り、ホストがモードを選んで部屋を作り、相手は部屋番号を入力して参加します。ふたりとも同じWi-Fiにつなぐのがおすすめ。言語はそれぞれ選べます。',
  e_storage:'この環境ではオンライン接続が使えません。「スマホ1台」モードをお使いください。',e_disc:'接続が切れました。ふたりとも同じWi-Fiにつないで、部屋を作り直してください。',connecting:'接続中…',e_name:'先に名前を入力してください。',e_create:'部屋を作れませんでした。もう一度お試しください。',e_code:'部屋番号は4桁の数字です。',e_notfound:'その部屋番号が見つかりません。相手が部屋を作ったか確認してください。',e_started:'この部屋はすでに始まっています。',
@@ -308,12 +303,13 @@ ja:{
  log:{start:'ゲーム開始！後手は補償として $100 多くもらえます。',again:'次のゲーム開始！後手は補償として $100 多くもらえます。',roll:'{n} が {s} を出した',pick:'{n} のキャラは {e} {c}：{d}',immune:'{n} は不死の体。おしおき無効（+$80）',heal:'{n} のヒール +$10',axe:'{n} が斧をキャッチ！+${a}',boost:'{n} はシヴィアの加速中！移動距離2倍で {s} マス進む',passGo:'{n} がスタートを通過、${b} 受け取り',
   canBuy:'{n} が「{t}」に到着。${p} で買える',poor:'{n} が「{t}」に到着したが、お金が足りない',rent:'{n} が {o} の「{t}」に止まり、家賃 ${r} を支払い',canUp:'{n} が自分の「{t}」に戻った。${c} でアップグレード可能',back:'{n} が自分の「{t}」に戻った',
   chance:'{n} がチャンスカード：{c}',tax:'{n} が税務署に ${a} 取られた',jail:'{n} がおしおき。次のターンは休み',wheel:'{n} のルーレット：「{w}」',rest:'{n} はカフェでひと休み',go:'{n} がスタートに止まった',
-  sell:'{n} はお金が足りず、「{t}」を売って ${v} 回収',bankrupt:'{n} が破産！',skip:'{n} はおしおき中、このターンは休み',bought:'{n} が「{t}」を購入',upgraded:'{n} が「{t}」をレベル {l} に',settle:'{m} ラウンド終了！資産結果：{a} ${x}、{b} ${y}'}
+  sell:'{n} はお金が足りず、「{t}」を売って ${v} 回収',bankrupt:'{n} が破産！',skip:'{n} はおしおき中、このターンは休み',bought:'{n} が「{t}」を購入',upgraded:'{n} が「{t}」をレベル {l} に',settle:'{m} ラウンド終了！資産結果：{r}',npcTurn:'{n}（NPC）が考えています…',out:'脱落'}
 }};
 let lang=(navigator.language||'').toLowerCase().startsWith('ja')?'ja':'zh';
 let layout='ring';
 const S=()=>STR[lang];
-function fmt(tpl,p){return tpl.replace(/\{(\w+)\}/g,(m,k)=>p&&p[k]!=null?esc(p[k]):m)}
+function npcName(v){return (typeof v==='string'&&v.startsWith('@npc'))?NPCS[+v.slice(4)][lang]:v}
+function fmt(tpl,p){return tpl.replace(/\{(\w+)\}/g,(m,k)=>p&&p[k]!=null?esc(npcName(p[k])):m)}
 function T(k,p){return fmt(S()[k],p)}
 function tileName(i){const t=tiles()[i];return t.n?t.n[lang]:S().tile[t.t]}
 function logText(e){const p=Object.assign({},e.p||{});if(p.ti!=null)p.t=tileName(p.ti);if(p.ci!=null)p.c=CARDS[p.ci].txt[lang];if(p.wi!=null)p.w=WHEEL[p.wi].txt[lang];if(p.chi!=null){p.e=CH[p.chi].e;p.c=CH[p.chi].n[lang];p.d=CH[p.chi].d[lang];}return fmt(S().log[e.k],p)}
@@ -338,16 +334,18 @@ const rnd=n=>Math.floor(Math.random()*n);
 const hasStorage=()=>typeof window.storage!=='undefined' && window.storage && window.storage.get;
 const key=()=> 'room:'+net.code;
 
-function newState(mode,names){
+function newState(mode,names,npc){
   const c=CFG[mode];
+  const players=[{name:names[0]||'玩家一',money:c.start,pos:0,skip:0,ch:0,npc:false,out:false},{name:names[1]||'玩家二',money:c.start+100,pos:0,skip:0,ch:1,npc:false,out:false}];
+  for(let k=0;k<(npc||0);k++) players.push({name:'@npc'+k,npcId:k,money:c.start+100+50*k,pos:0,skip:0,ch:2+k,npc:true,out:false});
   return {
-    mode, phase:'lobby', seq:1, code:net.code, guestJoined:false,
-    players:[{name:names[0]||'玩家一',money:c.start,pos:0,skip:0,ch:0},{name:names[1]||'玩家二',money:c.start+100,pos:0,skip:0,ch:1}],
+    mode, phase:'lobby', seq:1, code:net.code, guestJoined:false, npc:npc||0,
+    players,
     owners:{}, turn:0, round:1, step:'roll', pending:null, dice:[], winner:null, log:[]
   };
 }
 function tiles(){return TILES[st.mode]}
-function assignCh(){const a=rnd(CH.length); let b=rnd(CH.length-1); if(b>=a) b++; st.players[0].ch=a; st.players[1].ch=b;}
+function assignCh(){const pool=CH.map((_,i)=>i); st.players.forEach(p=>{ p.ch=pool.splice(rnd(pool.length),1)[0]; });}
 function logPicks(){ st.players.forEach(p=>log('pick',{n:p.name,chi:p.ch})); }
 function cfg(){return CFG[st.mode]}
 function log(k,p){st.log.unshift({k,p}); if(st.log.length>30) st.log.length=30;}
@@ -357,14 +355,16 @@ function rentAt(i,owner,level){const t=tiles()[i];let base=Math.round(t.p*(st.mo
 function rentOf(i){const o=st.owners[i];return rentAt(i,o.owner,o.level)}
 function upCost(i,pi){const c=tiles()[i].p/2; return (pi!=null&&has(pi,'lulu'))?Math.round(c*0.5/10)*10:c;}
 function worth(pi){let w=st.players[pi].money;for(const i in st.owners){const o=st.owners[i];if(o.owner===pi)w+=tiles()[i].p+o.level*(tiles()[i].p/2)}return w}
-function other(pi){return 1-pi}
+function active(){return st.players.map((p,i)=>p.out?-1:i).filter(i=>i>=0)}
+function other(pi){let best=-1,bw=-Infinity; st.players.forEach((q,i)=>{ if(i!==pi&&!q.out){ const w=worth(i); if(w>bw){bw=w;best=i;} } }); return best<0?pi:best;}
+function pname(pi){return npcName(st.players[pi].name);}
 
 function pay(pi,amt,to){
   const p=st.players[pi]; p.money-=amt; if(to!=null) st.players[to].money+=amt;
   if(p.money<0){
     const mine=Object.keys(st.owners).filter(i=>st.owners[i].owner===pi).sort((a,b)=>tiles()[b].p-tiles()[a].p);
     for(const i of mine){ if(p.money>=0) break; const v=tiles()[i].p/2+st.owners[i].level*upCost(i)/2; p.money+=v; delete st.owners[i]; log('sell',{n:p.name,ti:i,v}); }
-    if(p.money<0){ st.phase='over'; st.winner=other(pi); log('bankrupt',{n:p.name}); }
+    if(p.money<0){ p.money=0; p.out=true; log('bankrupt',{n:p.name}); const a=active(); if(a.length<=1){ st.phase='over'; st.winner=a.length?a[0]:null; st.ranking=a.map(i=>({i,w:worth(i)})); } }
   }
 }
 function applyFx(pi,fx){
@@ -373,7 +373,7 @@ function applyFx(pi,fx){
   if(fx.money) { if(fx.money>0) p.money+=fx.money; else pay(pi,has(pi,'bard')?Math.round(-fx.money/2/10)*10:-fx.money,null); }
   if(fx.give) pay(other(pi),fx.give,pi);
   if(fx.lose) pay(pi,fx.lose,other(pi));
-  if(fx.both){ p.money+=fx.both; q.money+=fx.both; }
+  if(fx.both){ st.players.forEach(x=>{ if(!x.out) x.money+=fx.both; }); }
   if(fx.jail){ if(has(pi,'sion')) log('immune',{n:p.name}); else p.skip=1; }
   if(fx.jailOther) q.skip=1;
   if(fx.boost) p.boost=1;
@@ -407,15 +407,28 @@ function land(pi,depth){
 }
 function endTurn(){
   st.step='roll'; st.pending=null; st.dice=[];
-  let guard=0;
-  do{
-    st.turn=other(st.turn); if(st.turn===0) st.round++;
-    if(cfg().maxRounds&&st.round>cfg().maxRounds){ st.phase='over'; const w0=worth(0),w1=worth(1); st.winner=w0===w1?null:(w0>w1?0:1); log('settle',{m:cfg().maxRounds,a:st.players[0].name,x:w0,b:st.players[1].name,y:w1}); return; }
+  if(st.phase==='over') return;
+  const n=st.players.length; let guard=0;
+  while(guard<n*2){
+    guard++;
+    st.turn=(st.turn+1)%n;
+    if(st.turn===0){
+      st.round++;
+      if(cfg().maxRounds&&st.round>cfg().maxRounds){ settle(); return; }
+    }
     const p=st.players[st.turn];
-    if(p.skip>0){ p.skip--; log('skip',{n:p.name}); guard++; continue; }
+    if(p.out) continue;
+    if(p.skip>0){ p.skip--; log('skip',{n:p.name}); continue; }
     if(has(st.turn,'yuumi')){ p.money+=10; log('heal',{n:p.name}); }
-    break;
-  }while(guard<3);
+    return;
+  }
+}
+function settle(){
+  st.phase='over';
+  const a=active(); const ws=a.map(i=>({i,w:worth(i)})).sort((x,y)=>y.w-x.w);
+  st.winner=(ws.length>1&&ws[0].w===ws[1].w)?null:ws[0].i;
+  st.ranking=ws;
+  log('settle',{m:cfg().maxRounds,r:ws.map(x=>`${npcName(st.players[x.i].name)} $${x.w}`).join('、')});
 }
 
 /* ---------- 網路同步（Claude 內用 storage，外部網頁用 WebRTC/PeerJS） ---------- */
@@ -470,7 +483,9 @@ function joinPeer(code,name){
 
 /* ---------- 畫面 ---------- */
 function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); }
-function myTurn(){ return !net.online || st.turn===net.me; }
+function isNpc(pi){return !!st.players[pi].npc}
+function myTurn(){ if(isNpc(st.turn)) return false; return !net.online || st.turn===net.me; }
+function npcRunner(){ return !net.online || net.me===0; }
 
 function render(){
   if(!st) return;
@@ -480,10 +495,11 @@ function render(){
   $('g-mode').textContent=T('m_'+st.mode)+'・'+(net.online?T('room')+' '+net.code:T('onePhone'));
   $('g-round').textContent=T('round',{r:Math.min(st.round,c.maxRounds),m:c.maxRounds});
   $('g-players').innerHTML=st.players.map((p,i)=>{const ch=CH[p.ch], on=st.turn===i&&st.phase==='play';
-    return `<div class="pl ${on?'turn':''}"><div class="av p${i} ${on?'pulse':''}">${ch.e}</div><div class="info"><div class="nm">${esc(p.name)}${net.online&&net.me===i?T('you'):''} <span class="ch">${ch.n[lang]}</span></div><div class="skill">${ch.d[lang]}${p.skip?'・'+T('skipping'):''}${p.boost?'・'+T('boosted'):''}</div></div><div class="right"><div class="money">$${p.money}</div><div class="cnt">${T('props')} <b>${propCount(i)}</b>・${T('worth')} $${worth(i)}</div></div></div>`;}).join('');
+    return `<div class="pl ${on?'turn':''} ${p.out?'out':''}"><div class="av p${i} ${on?'pulse':''}">${ch.e}</div><div class="info"><div class="nm">${esc(pname(i))}${net.online&&net.me===i?T('you'):''}${p.npc?`<span class="badge">${T('npcTag')}</span>`:''} <span class="ch">${ch.n[lang]}</span></div><div class="skill">${ch.d[lang]}${p.skip?'・'+T('skipping'):''}${p.boost?'・'+T('boosted'):''}</div></div><div class="right"><div class="money">$${p.money}</div><div class="cnt">${T('props')} <b>${propCount(i)}</b>・${T('worth')} $${worth(i)}</div></div></div>`;}).join('');
   renderBoard();
   renderPanel();
   $('log').innerHTML=st.log.map(l=>`<div>${logText(l)}</div>`).join('');
+  scheduleNpc();
 }
 function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 
@@ -526,13 +542,13 @@ function renderBoard(){
     const cls=['tile',t.t!=='prop'?'corner':'',o?'own'+o.owner:'',hot?'hot':''].join(' ');
     const band=t.t==='prop'?`<div class="band" style="background:var(--g${t.g})"></div>`:'<div class="band" style="background:transparent"></div>';
     const sub=t.t==='prop'?(o?`<span class="lv">${'▲'.repeat(o.level)||'&nbsp;'}</span>`:`<span class="tp">$${t.p}</span>`):(t.t==='tax'?`<span class="tp">-$${t.a}</span>`:'');
-    const tk=st.players.map((p,pi)=>p.pos===i?`<span class="tk p${pi} ${st.turn===pi&&st.phase==='play'?'pulse':''}">${CH[p.ch].e}</span>`:'').join('');
+    const tk=st.players.map((p,pi)=>(p.pos===i&&!p.out)?`<span class="tk p${pi} s${pi} ${st.turn===pi&&st.phase==='play'?'pulse':''}">${CH[p.ch].e}</span>`:'').join('');
     const [ar,turn]=dirOf(i,N);
     h+=`<div class="${cls}" style="grid-row:${r+1};grid-column:${c+1}">${band}<span class="idx">${i+1}</span><span class="dir ${turn?'turn':''}">${ar}</span><span class="tn">${tileName(i)}</span>${sub}${tk}</div>`;
   });
   if(layout==='ring'){
     const cur=st.players[st.turn];
-    const msg=st.phase==='over'?`<b>${T('over')}</b>`:(myTurn()?T('turnOf',{n:cur.name}):T('waitFor',{n:cur.name}));
+    const msg=st.phase==='over'?`<b>${T('over')}</b>`:(myTurn()?T('turnOf',{n:pname(st.turn)}):T('waitFor',{n:pname(st.turn)}));
     const last=st.log[0]?`<div class="last">${logText(st.log[0])}</div>`:'';
     h+=`<div class="mid" style="grid-row:2/${rows};grid-column:2/${cols}">${msg}${last}</div>`;
   }
@@ -544,44 +560,71 @@ function renderDice(){
   $('dice').innerHTML=d.map(x=>`<div class="die ${busy?'roll':''}">${x?FACES[x-1]:'·'}</div>`).join('');
 }
 
+function actBuy(yes){
+  const i=st.pending.tile, p=st.players[st.turn];
+  if(yes){ const bp=buyPrice(i,st.turn); st.owners[i]={owner:st.turn,level:0}; pay(st.turn,bp,null); log('bought',{n:p.name,ti:i}); }
+  st.pending=null; finish();
+}
+function actUp(yes){
+  const i=st.pending.tile, p=st.players[st.turn];
+  if(yes){ pay(st.turn,upCost(i,st.turn),null); st.owners[i].level++; log('upgraded',{n:p.name,ti:i,l:st.owners[i].level}); }
+  st.pending=null; finish();
+}
+function actEnd(){ endTurn(); render(); push(); }
+
+let npcTimer=null;
+function scheduleNpc(){
+  if(npcTimer){ clearTimeout(npcTimer); npcTimer=null; }
+  if(!st||st.phase!=='play'||busy||!isNpc(st.turn)||!npcRunner()) return;
+  npcTimer=setTimeout(npcAct,900);
+}
+function npcAct(){
+  npcTimer=null;
+  if(!st||st.phase!=='play'||busy||!isNpc(st.turn)||!npcRunner()) return;
+  const p=st.players[st.turn], reserve=st.mode==='quick'?120:250;
+  if(st.step==='roll'){ roll(); return; }
+  if(st.pending&&st.pending.type==='buy'){ actBuy(p.money-buyPrice(st.pending.tile,st.turn)>=reserve); return; }
+  if(st.pending&&st.pending.type==='up'){ actUp(p.money-upCost(st.pending.tile,st.turn)>=reserve); return; }
+  actEnd();
+}
+
 function renderPanel(){
   const say=$('say'), act=$('actions'), over=$('over');
   over.innerHTML='';
   if(st.phase==='over'){
     $('panel').style.display='none';
     const w=st.winner;
-    over.innerHTML=`<div class="over"><h2>${w==null?T('draw'):T('wins',{n:st.players[w].name})}</h2><p>${w==null?T('drawSub'):T('winSub')}</p>
+    const ws=(st.ranking||active().map(i=>({i,w:worth(i)}))).concat(st.players.map((p,i)=>p.out?{i,w:0,out:true}:null).filter(Boolean));
+    const rank=`<ol class="rank">${ws.map((x,k)=>`<li><span>${k+1}. ${CH[st.players[x.i].ch].e} ${esc(pname(x.i))}</span><b>${x.out?S().log.out:'$'+x.w}</b></li>`).join('')}</ol>`;
+    over.innerHTML=`<div class="over"><h2>${w==null?T('draw'):T('wins',{n:pname(w)})}</h2><p>${w==null?T('drawSub'):T('winSub')}</p>${rank}
       <div class="stack">${(!net.online||net.me===0)?`<button class="primary" id="b-again">${T('again')}</button>`:`<p class="sub" style="margin:0;color:var(--ink-soft)">${T('hostAgain')}</p>`}<button class="ghost" id="b-home" style="color:var(--ink);border-color:var(--paper-dim)">${T('home')}</button></div></div>`;
     const ag=$('b-again'); if(ag) ag.onclick=again;
     $('b-home').onclick=goHome;
     return;
   }
   $('panel').style.display='';
-  const p=st.players[st.turn];
-  if(!myTurn()){ say.innerHTML=T('waitTurn',{n:p.name}); act.innerHTML=''; return; }
+  const p=st.players[st.turn], nm=pname(st.turn);
+  if(isNpc(st.turn)){ say.innerHTML=fmt(S().log.npcTurn,{n:nm}); act.innerHTML=''; return; }
+  if(!myTurn()){ say.innerHTML=T('waitTurn',{n:nm}); act.innerHTML=''; return; }
   if(st.step==='moving'){ say.innerHTML=T('moving'); act.innerHTML=''; return; }
   if(st.step==='roll'){
-    say.innerHTML=net.online?T('yourTurn',{n:p.name}):T('passPhone',{n:p.name});
+    say.innerHTML=net.online?T('yourTurn',{n:nm}):T('passPhone',{n:nm});
     act.innerHTML=`<button class="primary wide" id="b-roll">${T('roll')}</button>`;
     $('b-roll').onclick=roll;
   } else if(st.pending&&st.pending.type==='buy'){
-    const t=tiles()[st.pending.tile];
     const bp=buyPrice(st.pending.tile,st.turn);
     say.innerHTML=T('buyQ',{t:tileName(st.pending.tile),p:bp});
     act.innerHTML=`<button class="primary" id="b-yes">${T('buy')}</button><button id="b-no">${T('noBuy')}</button>`;
-    $('b-yes').onclick=()=>{ st.owners[st.pending.tile]={owner:st.turn,level:0}; pay(st.turn,bp,null); log('bought',{n:p.name,ti:st.pending.tile}); st.pending=null; finish(); };
-    $('b-no').onclick=()=>{ st.pending=null; finish(); };
+    $('b-yes').onclick=()=>actBuy(true); $('b-no').onclick=()=>actBuy(false);
   } else if(st.pending&&st.pending.type==='up'){
-    const i=st.pending.tile,t=tiles()[i];
-    const uc=upCost(i,st.turn);
+    const i=st.pending.tile, uc=upCost(i,st.turn);
     say.innerHTML=T('upQ',{t:tileName(i),c:uc,a:rentOf(i),b:rentAt(i,st.turn,st.owners[i].level+1)});
     act.innerHTML=`<button class="primary" id="b-yes">${T('up')}</button><button id="b-no">${T('noUp')}</button>`;
-    $('b-yes').onclick=()=>{ pay(st.turn,uc,null); st.owners[i].level++; log('upgraded',{n:p.name,ti:i,l:st.owners[i].level}); st.pending=null; finish(); };
-    $('b-no').onclick=()=>{ st.pending=null; finish(); };
+    $('b-yes').onclick=()=>actUp(true); $('b-no').onclick=()=>actUp(false);
   } else {
     say.innerHTML=st.log[0]?logText(st.log[0]):'';
     act.innerHTML=`<button class="primary wide" id="b-end">${T('end')}</button>`;
-    $('b-end').onclick=()=>{ endTurn(); render(); push(); };
+    $('b-end').onclick=actEnd;
   }
 }
 function finish(){ if(st.phase==='over'){ render(); push(); return; } st.step='end'; render(); push(); }
@@ -608,12 +651,13 @@ async function roll(){
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
 /* ---------- 大廳 / 流程 ---------- */
-let homeConn='online', homeMode='quick';
+let homeConn='online', homeMode='quick', homeNpc=0;
 document.querySelectorAll('#seg-conn button').forEach(b=>b.onclick=()=>{ homeConn=b.dataset.v; document.querySelectorAll('#seg-conn button').forEach(x=>x.classList.toggle('sel',x===b)); $('joincode').parentElement.style.display=homeConn==='online'?'':'none'; $('home-note').style.display=homeConn==='online'?'':'none'; $('f-name2').style.display=homeConn==='online'?'none':''; $('b-create').textContent=homeConn==='online'?T('create'):T('startLocal'); });
 document.querySelectorAll('#seg-lang button').forEach(b=>b.onclick=()=>{ lang=b.dataset.v; applyLang(); });
 $('b-lang').onclick=()=>{ lang=lang==='ja'?'zh':'ja'; applyLang(); };
 $('b-layout').onclick=()=>{ layout=layout==='ring'?'snake':'ring'; applyLang(); };
 document.querySelectorAll('#seg-layout button').forEach(b=>b.onclick=()=>{ layout=b.dataset.v; applyLang(); });
+document.querySelectorAll('#seg-npc button').forEach(b=>b.onclick=()=>{ homeNpc=+b.dataset.v; document.querySelectorAll('#seg-npc button').forEach(x=>x.classList.toggle('sel',x===b)); });
 document.querySelectorAll('#seg-mode button').forEach(b=>b.onclick=()=>{ homeMode=b.dataset.v; document.querySelectorAll('#seg-mode button').forEach(x=>x.classList.toggle('sel',x===b)); });
 
 $('b-create').onclick=async()=>{
@@ -621,12 +665,12 @@ $('b-create').onclick=async()=>{
   if(homeConn==='local'){
     net={online:false,code:'',me:0};
     const n2=$('name2').value.trim()||(lang==='ja'?'プレイヤー2':'玩家二');
-    st=newState(homeMode,[name||(lang==='ja'?'プレイヤー1':'玩家一'),n2]); assignCh(); st.phase='play'; logPicks(); log('start'); render(); return;
+    st=newState(homeMode,[name||(lang==='ja'?'プレイヤー1':'玩家一'),n2],homeNpc); assignCh(); st.phase='play'; logPicks(); log('start'); render(); return;
   }
   if(!netOK()){ $('home-err').textContent=T('e_storage'); return; }
   if(!name){ $('home-err').textContent=T('e_name'); return; }
   net={online:true,code:String(1000+rnd(9000)),me:0};
-  st=newState(homeMode,[name,'']);
+  st=newState(homeMode,[name,''],homeNpc);
   $('b-create').disabled=true; $('home-err').textContent=T('connecting');
   try{
     if(hasStorage()) await window.storage.set(key(),JSON.stringify(st),true);
@@ -671,10 +715,10 @@ function renderLobby(){
 }
 function again(){
   const names=st.players.map(p=>p.name), seq=st.seq;
-  st=newState(st.mode,names); st.seq=seq; assignCh(); st.phase='play'; st.guestJoined=true; logPicks(); log('again');
+  st=newState(st.mode,names.slice(0,2),st.npc); st.seq=seq; assignCh(); st.phase='play'; st.guestJoined=true; logPicks(); log('again');
   render(); push();
 }
-function goHome(){ stopPolling(); st=null; net={online:false,code:'',me:0}; show('s-home'); applyLang(); }
+function goHome(){ stopPolling(); if(npcTimer){clearTimeout(npcTimer);npcTimer=null;} st=null; net={online:false,code:'',me:0}; show('s-home'); applyLang(); }
 applyLang();
 </script>
 </body>
